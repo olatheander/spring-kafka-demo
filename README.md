@@ -8,3 +8,12 @@ This demo brings together a bunch of stuff from
 to wire up a simple service with a REST endpoint that can be used to publish simple data to a Kafka topic and a Consumer that consumes
 the data from the same topic and just logs it.
 
+## Massage the endpoints
+
+### Post
+```
+$ curl -H "Accept:application/json" \
+-H  "Content-Type:application/json" \
+http://localhost:8080/kafka/send/ \
+-d @stuff.json
+```

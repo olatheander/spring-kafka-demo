@@ -1,4 +1,4 @@
-package com.example.springkafkademo;
+package com.zettle.demo.kafka.config;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -9,6 +9,8 @@ import org.springframework.kafka.core.KafkaAdmin;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.zettle.demo.kafka.constants.Topics.ZETTLE;
 
 @Configuration
 public class KafkaTopicConfig {
@@ -23,7 +25,9 @@ public class KafkaTopicConfig {
     }
 
     @Bean
-    public NewTopic topic1() {
-        return new NewTopic("zettle", 1, (short) 1);
+    public NewTopic zettleTopic() {
+        return new NewTopic(ZETTLE,
+                1,
+                (short) 1);
     }
 }
