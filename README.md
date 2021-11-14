@@ -10,10 +10,16 @@ the data from the same topic and just logs it.
 
 ## Massage the endpoints
 
+### List
+```
+$ curl -H "Accept:application/json" \
+http://localhost:8080/stuff/list/
+```
+
 ### Post
 ```
 $ curl -H "Accept:application/json" \
 -H  "Content-Type:application/json" \
-http://localhost:8080/kafka/send/ \
+http://localhost:8080/stuff/send/ \
 -d @stuff.json
 ```

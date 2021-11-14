@@ -9,18 +9,32 @@ import org.springframework.http.MediaType;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/kafka")
-public class KafkaController {
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaController.class);
+@RequestMapping("/stuff")
+public class StuffController {
+    private static final Logger LOG = LoggerFactory.getLogger(StuffController.class);
 
     @Autowired
     private KafkaTemplate<String, Stuff> kafkaTemplate;
+
+    @Autowired
+    private StuffRepository stuffRepository;
+
+    @GetMapping(path = "/list",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Stuff> listStuff() {
+        return stuffRepository.findAll()
+                .stream()
+                .map(stuff -> new Stuff(
+                        stuff.getName(),
+                        stuff.getAge()))
+                .collect(Collectors.toList());
+    }
 
     @PostMapping(path = "/send",
             consumes = MediaType.APPLICATION_JSON_VALUE)

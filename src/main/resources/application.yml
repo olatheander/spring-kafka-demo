@@ -1,4 +1,12 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/stuff
+    username: postgres
+    password: example
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
   kafka:
     bootstrap-servers: "localhost:29092,localhost:39092"
     consumer:
